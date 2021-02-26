@@ -4,7 +4,7 @@ function getSingleHexCharValue(hexChar) {
   return hexCharValues[hexChar];
 }
 
-function getNDigitHexStringValue(hexString) {
+function convertHexStringToNumber(hexString) {
   let totalValue = 0;
   const startIndex = hexString[0] === '#' ? 1 : 0;
   for (let i = 0; i < hexString.length - startIndex; i++) {
@@ -17,12 +17,12 @@ function getNDigitHexStringValue(hexString) {
 function calculateValuesOfHexStrings(hexStrings) {
   let hexStrNumberPairs = {};
   for (const hexString of hexStrings) {
-    hexStrNumberPairs[hexString] = getNDigitHexStringValue(hexString);
+    hexStrNumberPairs[hexString] = convertHexStringToNumber(hexString);
   }
   return hexStrNumberPairs;
 }
 
 module.exports = {
-  getNDigitHexStringValue,
+  convertHexStringToNumber,
   calculateValuesOfHexStrings
 };
