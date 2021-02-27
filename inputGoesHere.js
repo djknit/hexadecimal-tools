@@ -1,8 +1,8 @@
-const { addHexInput, addNumInput } = require('./utilities');
+const { input } = require('./utilities');
 
 /*
 ADD INPUT BELOW USING `addHexInput` AND `addNumInput` METHODS.
-  note: both of these methods take accept the same parameter structures
+  note: both of these methods take accept the same parameter structures. can be called as many times as needed
   
   examples:
     addHexInput('ae92f');
@@ -29,7 +29,12 @@ ADD INPUT BELOW USING `addHexInput` AND `addNumInput` METHODS.
         values: [12, 16, 33]
       }
     ]);
-    addHexInput(['ae44e', '3229], ['289be', '3897e', 'af03e']);
+    addHexInput([['ae44e', '3229], ['289be', '3897e', 'af03e']]);
 */
 
-addHexInput
+input(['ff', 'aa', 'e9']);
+
+input(12)
+input(['ff'])
+input({ name: 'named', value: 'fff'})
+input({name: 'jeff', isGroup: true, value: 'eee'})

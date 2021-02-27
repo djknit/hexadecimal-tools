@@ -4,7 +4,9 @@
   "description": "General utilities for hexadecimals with a focus on hex colors",
   "main": "index.js",
   "scripts": {
-    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
+    "start": "nodemon index.js",
+    "run": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/djknit/hexadecimal-tools/issues"
   },
-  "homepage": "https://github.com/djknit/hexadecimal-tools#readme"
+  "homepage": "https://github.com/djknit/hexadecimal-tools#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
