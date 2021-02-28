@@ -1,4 +1,18 @@
-const { hexCharsIndexedByValue } = require('./constants');
+const { constants: { hexCharsIndexedByValue } } = require('./utilities');
+
+module.exports = {
+  calculateHexStringsForNumbers
+};
+
+//-----------------------------------
+
+function calculateHexStringsForNumbers(numbers) {
+  let numberHexStringPairs = {};
+  for (const number of numbers) {
+    numberHexStringPairs[number.toString()] = convertNumberToHexString(number);
+  }
+  return numberHexStringPairs;
+}
 
 function convertNumberToHexString(number) { // number should be an integer
   const integerValue = Math.round(number);
@@ -15,16 +29,3 @@ function convertNumberToHexString(number) { // number should be an integer
   }
   return hexString;
 }
-
-function calculateHexStringsForNumbers(numbers) {
-  let numberHexStringPairs = {};
-  for (const number of numbers) {
-    numberHexStringPairs[number.toString()] = convertNumberToHexString(number);
-  }
-  return numberHexStringPairs;
-}
-
-module.exports = {
-  convertNumberToHexString,
-  calculateHexStringsForNumbers
-};
