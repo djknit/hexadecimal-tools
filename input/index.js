@@ -1,15 +1,15 @@
 const { processSingleInputArg }= require('./userInputHandling');
+const constants = require('./constants');
 
 let _inputValues = [];
 
 module.exports = {
-  input: {
-    get values() {
-      return [..._inputValues];
-    },
-    addInputValues,
-    clear: clearInput
-  }
+  get values() {
+    return [..._inputValues];
+  },
+  addInputValues,
+  clear: clearInput,
+  constants
 };
 
 //-------------------------------------------------------

@@ -23,12 +23,16 @@ function processSingleInputArg(inputArg) {
   return constructGroup(inputArg);
 }
 
-function constructValue(basicOrNamedValue) {
-  if (isNamedValue(basicOrNamedValue)) return new Value(basicOrNamedValue.value, basicOrNamedValue.name);
-  return new Value(basicOrNamedValue); 
+function constructValue(basicOrNamedValue, groupType, groupTargetType) {
+  if (isNamedValue(basicOrNamedValue)) {
+    const { value, name, type, targetType } = basicOrNamedValue;
+    return new Value(value, name, type || groupType, targetType || groupTargetType);
+  }
+  return new Value(basicOrNamedValue, undefined, groupType, groupTargetType); 
 }
 
-function constructGroup({ value, values, name }) {
+function constructGroup({ value, values, name, type, targetType }) {
   const valuesArray = values || [value];
-  return new Group(valuesArray.map(constructValue), name);
+  const processedValues = valuesArray.map(val => constructValue(val, type, targetType));
+  return new Group(valuesArray.map(constructValue), name, type, targetType);
 }
