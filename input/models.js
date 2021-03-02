@@ -1,16 +1,16 @@
 const { throwInvalid } = require('../utilities');
 const { isBasicValue } = require('./typeCheckers');
-const { basicInputTypes, groupTypes } = require('./constants');
+const { basicInputTypes, groupTypes, hexCharsIndexedByValue } = require('./constants');
 
 function processRawValue(rawValue, type) {
-
+  const trimmedValue = typeof(rawValue) === 'string' ? rawValue.trim() : rawValue;
+  if ([undefined, null, ''].includes(trimmedValue)) {
+    return { isValid: true, value: null };
+  }
+  return type === 'num' ? parseRawValueAsNumber(trimmedValue) : parseRawValueAsHex(trimmedValue);
 }
 
 function parseRawValueAsNumber(rawValue) { // should already be guaranteed to be number, string, or falsey
-  const isStr = typeof(rawValue) === 'string';
-  if (rawValue === undefined || rawValue === null || (isStr && !rawValue.trim())) {
-    return { isValid: true, value: null };
-  }
   const parsedValue = parseFloat(rawValue);
   const roundedVal = Math.round(parsedValue);
   if (!parsedValue && parsedValue !== 0) {
@@ -21,12 +21,22 @@ function parseRawValueAsNumber(rawValue) { // should already be guaranteed to be
   }
   return {
     value: roundedVal,
-    isValid: !isStr || rawValue.trim() === roundedVal.toString()
+    isValid: typeof(rawValue) !== 'string' || rawValue === roundedVal.toString()
   };
 }
 
-function parseRawValueAsHex() {
-
+function parseRawValueAsHex(rawValue) {
+  let workingValue = rawValue.toString();
+  if (workingValue[0] === '#') workingValue = workingValue.slice(1);
+  for (let i = 0; i < workingValue.length; i++) {
+    if (![hexCharsIndexedByValue].includes(workingValue[i])) {
+      return {
+        isValid: false,
+        value: workingValue.slice(0, i)
+      };
+    }
+  }
+  return { isValid: true, value: workingValue };
 }
 
 class Value {
@@ -38,9 +48,9 @@ class Value {
     if (basicInputTypes.includes(type)) Object.assign(this, { type });
     else if (typeof(basicValue) === 'number') this.type = 'num';
     else if (typeof(basicValue) === 'string') this.type = 'hex';
-    this.value = this.type === 'num' ? Math.round(parseFloat(basicValue)) : basicValue.toString();
-    if (basicInputTypes.includes(targetType)) Object.assign(this, { targetType });
+    if (basicInputTypes.includes(targetType)) Object.assign(this, { targetType })
     else if (this.type) this.targetType = this.type === 'num' ? 'hex' : 'num';
+    this.parsedValue = processRawValue(basicValue, this.type);
   };
 };
 
