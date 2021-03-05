@@ -1,25 +1,13 @@
-const { hexCharsIndexedByValue } = require('../utilities').constants;
+const { hexCharsIndexedByValue } = require('../../constants');
 
-module.exports = {
-  // convertNumbersToHexStrings,
-  convertNumberToHexString
-};
+module.exports = convertNumberToHexString;
 
-//-----------------------------------
-
-// function convertNumbersToHexStrings(numbers) {
-//   let numberHexStringPairs = {};
-//   for (const number of numbers) {
-//     numberHexStringPairs[number.toString()] = convertNumberToHexString(number);
-//   }
-//   return numberHexStringPairs;
-// }
 
 function convertNumberToHexString(number) { // number should be an integer
   const integerValue = Math.round(parseFloat(number));
   let order = 0; // Order of magnitude base 16. Equal to 1 less than the number of digits/chars in the hex representation
   while (Math.pow(16, order + 1) <= integerValue) {
-    ++order;   // working note: should possibly use logarithms, but this method works
+    ++order;   // should possibly use logarithms instead of while loop and exponents, but this method works
   }
   let hexString = '', remainder = integerValue;
   for (let i = order; i >= 0; i--) {
@@ -30,5 +18,3 @@ function convertNumberToHexString(number) { // number should be an integer
   }
   return hexString;
 }
-
-

@@ -1,19 +1,7 @@
-const { constants: { hexCharValues } } = require('../utilities');
+const { hexCharValues } = require('../../constants');
 
-module.exports = {
-  // calculateValuesOfHexStrings,
-  convertHexStringToNumber
-};
+module.exports = convertHexStringToNumber;
 
-//-----------------------------------
-
-// function calculateValuesOfHexStrings(hexStrings) {
-//   let hexStrNumberPairs = {};
-//   for (const hexString of hexStrings) {
-//     hexStrNumberPairs[hexString] = convertHexStringToNumber(hexString);
-//   }
-//   return hexStrNumberPairs;
-// }
 
 function convertHexStringToNumber(hexString) {
   let totalValue = 0;

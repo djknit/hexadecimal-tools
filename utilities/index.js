@@ -2,5 +2,6 @@ const constants = require('./constants');
 
 module.exports = {
   ...require('./display'),
-  constants
+  constants,
+  ...require('./conversions')
 };

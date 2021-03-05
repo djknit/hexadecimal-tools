@@ -1,14 +1,7 @@
-const { convertHexStringToNumber } = require('./hexStringToNumber');
-const { convertNumberToHexString } = require('./numberToHexString');
+const convertNumberToHexString = require('./convertNumberToHexString');
 
-function convertHexColorToRgb(hexString) {
-  const startIndex = hexString[0] === '#' ? 1 : 0;
-  let componentParts = [];
-  for (let i = startIndex; i < hexString.length; i = i + 2) {
-    componentParts.push(hexString.substring(i, i + 2));
-  }
-  return componentParts.map(convertHexStringToNumber);
-}
+module.exports = convertRgbColorToHex;
+
 
 function convertRgbColorToHex(rgbArrayOrString) {
   return convertRgbArrayToHexColor(
@@ -32,8 +25,3 @@ function convertRgbArrayToHexColor(rgbArray) {
   };
   return hexColorString;
 }
-
-module.exports = {
-  convertHexColorToRgb,
-  convertRgbColorToHex
-};
