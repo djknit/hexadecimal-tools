@@ -1,8 +1,8 @@
-require('./inputGoesHere');
-// require('./utilities').runCalculationsAndConsoleLogResults();
+const { consoleLogKeyValuePairs } = require('./utilities');
+const { convertHexStringToNumber, convertNumberToHexString } = require('./calculations');
 
-const { input } = require('./input');
-
-
-
-console.log(parseFloat(' cast'))
+let set_0 = {};
+['aa', 'bec', '450', '9'].forEach(str => {
+  set_0[str] = convertHexStringToNumber(str);
+});
+consoleLogKeyValuePairs(set_0)

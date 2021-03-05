@@ -11,9 +11,9 @@ function formatKeyValuePairs(obj, keysOrder = [], name) {
     const displayValueForKey = typeof(valueForKey) === 'string' ? `"${valueForKey}"` : valueForKey;
     displayValue += `\n  ${key} --> ${displayValueForKey}`;
   }
-  displayValue += '-' + '-'.repeat(numBorderChars - 2) + '-';
+  displayValue += '\n*' + '-'.repeat(numBorderChars - 2) + '*';
   return `\n${displayValue}\n`;
-} 
+}
 
 function consoleLogKeyValuePairs(obj, keysOrder, name) {
   console.log(formatKeyValuePairs(obj, keysOrder, name));

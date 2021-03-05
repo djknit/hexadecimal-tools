@@ -1,8 +1,7 @@
-const { calculateHexStringsForNumbers } = require('./numberToHexString');
-const { calculateValuesOfHexStrings } = require('./hexStringToNumber');
-const input = require('../input');
+const { convertNumberToHexString } = require('./numberToHexString');
+const { convertHexStringToNumber } = require('./hexStringToNumber');
 
 module.exports = {
-  calculateHexStringsForNumbers,
-  calculateValuesOfHexStrings
+  convertNumberToHexString,
+  convertHexStringToNumber
 };
