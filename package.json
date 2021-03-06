@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/djknit/hexadecimal-tools#readme",
   "dependencies": {
+    "columnify": "^1.5.4",
     "nodemon": "^2.0.7"
   }
 }

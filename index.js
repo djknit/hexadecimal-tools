@@ -1,14 +1,21 @@
 const {
-  consoleLogKeyValuePairs,
-  convertHexStringToNumber
-} = require('./utilities');
+  printRgbColorForHexColor,
+  printHexStringForNumber,
+  convertHexColorToRgb,
+  convertHexStringToNumber,
+  convertNumberToHexString,
+  convertRgbColorToHex,
+  printHexColorForRgbColor,
+  printNumberForHexString
+} = require('./client');
 
-let set_0 = {};
-['aa', 'bec', '450', '9'].forEach(str => {
-  set_0[str] = convertHexStringToNumber(str);
-});
-consoleLogKeyValuePairs(set_0)
+const testVals0 = ['aa', 'bec', '450', '9'];
+testVals0.forEach(printNumberForHexString)
+
+convertNumberToHexString(255, true)
+
+printRgbColorForHexColor('aae277')
 
 module.exports = {
-
+  ...require('./utilities')
 };
