@@ -1,8 +1,4 @@
 const {
-  printHeader
-} = require('./utilities');
-
-const {
   printRgbColorForHexColor,
   printHexStringForNumber,
   convertHexColorToRgb,

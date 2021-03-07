@@ -1,4 +1,5 @@
 module.exports = {
   ...require('./decToHex'),
-  ...require('./hexToDec')
+  ...require('./hexToDec'),
+  ...require('./arrayOfValues')
 };

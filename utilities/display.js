@@ -1,9 +1,12 @@
+const columnify = require('columnify');
+
 module.exports = {
   printInAndOutValues,
   rgbArrToStr,
   formatHexString,
   printHeader,
-  printFooter
+  printFooter,
+  convertCamelCaseStringToStartCase
 };
 
 
@@ -35,4 +38,24 @@ function printHeader(widthInChars = defaultLineLength) {
 
 function printFooter(widthInChars = defaultLineLength) {
   console.log('%'.repeat(widthInChars) + '\n' + '`'.repeat(widthInChars));
+}
+
+function printInAndOutValuesArray(arrayOfInOutPairs, inputPropName, outputPropName) {
+  arrayOfInOutPairs.forEach(inputOutputPair => ({
+
+  }));
+}
+
+function convertCamelCaseStringToStartCase(camelCaseString) {
+  if (!camelCaseString) return '';
+  let titleCaseString = camelCaseString[0].toUpperCase;
+  for (let i = 1; i < camelCaseString.length; i++) {
+    const currentCharacter = camelCaseString[i];
+    let isUpperCase, isLowerCase;
+    if (currentCharacter === currentCharacter.toUpperCase()) isUpperCase = true;
+    else if (currentCharacter === currentCharacter.toLowerCase()) isLowerCase = true;
+    if (isUpperCase && i > 0 && camelCaseString[i - 1] !== ' ') titleCaseString += ' ';
+    titleCaseString += currentCharacter;
+    if (!isUpperCase && !isLowerCase) titleCaseString += ' ';
+  }
 }
