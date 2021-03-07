@@ -6,15 +6,13 @@ const {
   convertNumberToHexString,
   convertRgbColorToHex,
   printHexColorForRgbColor,
-  printNumberForHexString
+  printNumberForHexString,
+  endStaticInputMethodCalls
 } = require('./client');
 
-const testVals0 = ['aa', 'bec', '450', '9'];
-testVals0.forEach(printNumberForHexString)
+require('./STATIC_INPUT');
+endStaticInputMethodCalls();
 
-convertNumberToHexString(255, true)
-
-printRgbColorForHexColor('aae277')
 
 module.exports = {
   ...require('./utilities')

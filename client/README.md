@@ -8,4 +8,4 @@
 
 ***
 
-### Please see [main project Readme](../README.md) for full more complete information.
+### Please see [main project Readme](../README.md) for more complete information.
