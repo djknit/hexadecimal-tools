@@ -40,11 +40,11 @@ function printFooter(widthInChars = defaultLineLength) {
   console.log('%'.repeat(widthInChars) + '\n' + '`'.repeat(widthInChars));
 }
 
-function printInAndOutValuesArray(arrayOfInOutPairs, inputPropName, outputPropName) {
-  arrayOfInOutPairs.forEach(inputOutputPair => ({
+// function printInAndOutValuesArray(arrayOfInOutPairs, inputPropName, outputPropName) {
+//   arrayOfInOutPairs.forEach(inputOutputPair => ({
 
-  }));
-}
+//   }));
+// }
 
 function convertCamelCaseStringToStartCase(camelCaseString) {
   if (!camelCaseString) return '';
