@@ -16,21 +16,30 @@ function runConversionsOnGenericInputs(processedInputs, hexOrNum) {
   });
 }
 
-function runSingleValueConversion(processedInput, hexOrNum) {
+function runSingleValueConversion(processedInput, hexOrNum, reportNamedValueExistence) {
   const convert = hexOrNum === 'hex' ? convertHexStringToNumber : convertNumberToHexString;
   const { value, name } = processedInput;
-  return { name, inputValue: value, outputValue: convert(value) };
+  delete processedInput.value;
+  if (name) reportNamedValueExistence();
+  Object.assign(processedInput, { inputValue: value, outputValue: convert(value) });
+  return processedInput;
 }
 
 function runGroupOfValuesConversions(processedInput, hexOrNum) {
-  const { name, values, isGroup } = processedInput;
-  return {
-    name,
-    values: values.map(val => runSingleValueConversion(val, hexOrNum)),
-    isGroup
-  };
+  let hasNamedValue = false;
+  const reportNamedValueExistence = () => hasNamedValue = true;
+  processedInput.values = processedInput.values.map(
+    val => runSingleValueConversion(val, hexOrNum, reportNamedValueExistence)
+  );
+  Object.assign(processedInput, { hasNamedValue });
+  return processedInput;
 }
 
 function runMultipleGroupsConversions(processedInput, hexOrNum) {
-  return processedInput.map(group => runGroupOfValuesConversions(group, hexOrNum));
+  let hasNamedValue = false;
+  const convertedGroups = processedInput.map(group => {
+    const convertedGroup = runGroupOfValuesConversions(group, hexOrNum);
+    if (convertedGroup.hasNamedValue) hasNamedValue = true;
+  });
+  return { hasNamedValue, groups: convertedGroups };
 }
