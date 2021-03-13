@@ -40,12 +40,7 @@ function printFooter(widthInChars = defaultLineLength) {
   console.log('%'.repeat(widthInChars) + '\n' + '`'.repeat(widthInChars));
 }
 
-// function printInAndOutValuesArray(arrayOfInOutPairs, inputPropName, outputPropName) {
-//   arrayOfInOutPairs.forEach(inputOutputPair => ({
-
-//   }));
-// }
-
+// probably get rid of this one:
 function convertCamelCaseStringToStartCase(camelCaseString) {
   if (!camelCaseString) return '';
   let titleCaseString = camelCaseString[0].toUpperCase;

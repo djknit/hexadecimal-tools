@@ -1,27 +1,40 @@
 const {
   convertHexStringToNumber,
-  convertNumberToHexString
+  convertNumberToHexString,
+  constants
 } = require('../utilities');
+
+const { invalidHexInputString } = constants;
 
 module.exports = runConversionsOnGenericInputs;
 
 
 function runConversionsOnGenericInputs(processedInputs, hexOrNum) {
-  processedInputs.forEach(
-    processedInput => (
+  processedInputs.forEach(processedInput => {
+    const convert = (
       (Array.isArray(processedInput) && runMultipleGroupsConversions) ||
       (processedInput.isGroup && runGroupOfValuesConversions) ||
       runSingleValueConversion
-    )(processedInput, hexOrNum)
-  );
+    );
+    return convert(processedInput, hexOrNum);
+  });
+  return processedInputs;
 }
 
 function runSingleValueConversion(processedInput, hexOrNum, reportNamedValueExistence) {
-  const convert = hexOrNum === 'hex' ? convertHexStringToNumber : convertNumberToHexString;
+  const isHex = hexOrNum === 'hex';
+  const convert = isHex ? convertHexStringToNumber : convertNumberToHexString;
   const { value, name } = processedInput;
+  const isValidInputVal = isHex ? value === invalidHexInputString : isNaN(value);
   delete processedInput.value;
   if (name) reportNamedValueExistence();
-  Object.assign(processedInput, { inputValue: value, outputValue: convert(value) });
+  Object.assign(
+    processedInput,
+    {
+      inputValue: isValidInputVal ? value : '(INVALID)',
+      outputValue: isValidInputVal ? convert(value) : undefined,
+      ...getInputOutputTypes(hexOrNum)
+    });
   return processedInput;
 }
 
@@ -31,7 +44,10 @@ function runGroupOfValuesConversions(processedInput, hexOrNum) {
   processedInput.values = processedInput.values.map(
     val => runSingleValueConversion(val, hexOrNum, reportNamedValueExistence)
   );
-  Object.assign(processedInput, { hasNamedValue });
+  Object.assign(
+    processedInput,
+    { hasNamedValue, ...getInputOutputTypes(hexOrNum) }
+  );
   return processedInput;
 }
 
@@ -41,5 +57,14 @@ function runMultipleGroupsConversions(processedInput, hexOrNum) {
     const convertedGroup = runGroupOfValuesConversions(group, hexOrNum);
     if (convertedGroup.hasNamedValue) hasNamedValue = true;
   });
-  return { hasNamedValue, groups: convertedGroups };
+  return {
+    hasNamedValue, groups: convertedGroups, ...getInputOutputTypes(hexOrNum)
+  };
+}
+
+function getInputOutputTypes(inputType) {
+  return {
+    inputType,
+    outputType: inputType === 'hex' ? 'num' : 'hex'
+  };
 }

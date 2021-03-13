@@ -1,3 +1,12 @@
+/*
+
+THIS FILE NOT CURRENTLY IN USE
+
+Replaced by methods in client folder
+
+*/
+
+
 const { convertNumberToHexString, convertRgbColorToHex} = require('./decToHex');
 const { convertHexStringToNumber, convertHexColorToRgb } = require('./hexToDec');
 

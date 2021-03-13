@@ -1,3 +1,12 @@
+/*
+
+THIS FILE NOT CURRENTLY IN USE
+
+Replaced by methods under './generic'
+
+*/
+
+
 const columnify = require('columnify');
 const {
   convertNumbersToHexStrings,

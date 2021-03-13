@@ -1,18 +1,12 @@
 const {
-  printRgbColorForHexColor,
-  printHexStringForNumber,
-  convertHexColorToRgb,
-  convertHexStringToNumber,
-  convertNumberToHexString,
-  convertRgbColorToHex,
-  printHexColorForRgbColor,
-  printNumberForHexString
+  inputHex,
+  inputDecimal
 } = require('./client');
 
 
 const testVals0 = ['aa', 'bec', '450', '9'];
-testVals0.forEach(printNumberForHexString)
+inputHex(testVals0)
 
-convertNumberToHexString(255, true)
+inputDecimal(255)
 
-printRgbColorForHexColor('aae277')
+// printRgbColorForHexColor('aae277')

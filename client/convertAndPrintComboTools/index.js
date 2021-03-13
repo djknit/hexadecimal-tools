@@ -2,7 +2,8 @@ const { printHeader, printFooter } = require('./utilities');
 
 const rawMethods = {
   ...require('./decNumbersToHexStrings'),
-  ...require('./hexStringsToDecNumbers')
+  ...require('./hexStringsToDecNumbers'),
+  ...require('./generic')
 };
 
 let _hasAnyPrintMethodBeenCalled = false;
@@ -15,7 +16,9 @@ for (const methodName in rawMethods) {
       printHeader();
     }
     _hasAnyPrintMethodBeenCalled = true;
-    return rawMethods[methodName](...args);
+    const result = rawMethods[methodName](...args);
+    console.log(' ');
+    return result;
   }
 }
 

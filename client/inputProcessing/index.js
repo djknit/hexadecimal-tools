@@ -15,6 +15,8 @@ Raw input parameter values should be one of the following:
   * obj { <name1>: <either of previous 2 group representations>, ... }   --> multiple groups
 */
 
+const { constants: { invalidHexInputString } } = require('../utilities');
+
 const processHexInput = (rawInput => processInput(rawInput, 'hex'));
 const processNumInput = (rawInput => processInput(rawInput, 'num'));
 
@@ -23,6 +25,7 @@ module.exports = {
   processHexInput,
   processNumInput
 };
+
 
 function processInput(rawInput, hexOrNum) {
   const processor = (
@@ -79,7 +82,7 @@ function parseSimpleValue(rawSimpleValue, hexOrNum) { // for value portion only 
   if (!rawSimpleValue && rawSimpleValue !== 0) return rawSimpleValue;
   const isHex = hexOrNum === 'hex', isString = typeof(rawSimpleValue) === 'string';
   if (!isString && typeof(rawSimpleValue) !== 'number') {
-    return isHex ? 'INVALID' : NaN;
+    return isHex ? invalidHexInputString : NaN;
   }
   const trimmedVal = isString ? rawSimpleValue.trim() : rawSimpleValue;
   if (isHex) return trimmedVal;
@@ -101,7 +104,7 @@ function processGroupOfValuesInput(rawInput, hexOrNum, groupName) {
   if (rawInput.values) {
     return {
       isGroup: true,
-      name: rawInput.name,
+      name: rawInput.name || groupName,
       values: rawInput.values.map(_processSingleValsArray)
     };
   }
